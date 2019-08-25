@@ -2,7 +2,7 @@
 
 ## Objetivo principal
 
-Incentivar la descarga del app ParaTi.
+Incentivar la descarga del app.
 
 ## Descripción
 
