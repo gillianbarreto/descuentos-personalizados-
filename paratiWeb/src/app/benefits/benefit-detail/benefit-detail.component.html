@@ -1,0 +1,153 @@
+<!-- Loading -->
+<ngx-loading [show]="loading"></ngx-loading>
+
+<div class="wrapper">
+    <div class="container mx-auto">
+        
+        <!-- Volver -->
+        <app-navigate-back></app-navigate-back>
+
+        <!-- Mensaje -->
+        <div class="message-container" *ngIf="info">
+            <app-show-message [info]="info"></app-show-message>
+        </div>
+
+        <!-- Detalle del Beneficio -->
+        <ng-container *ngIf="card">
+            <div class="row">
+                <!-- Imagen -->
+                <div class="col-sm-6">
+                    <app-benefit-thumb [card]="card"></app-benefit-thumb>
+                </div>
+                <div class="col-sm-6">
+                    <h2 class="detail-title">{{ card.nameBenefit }}</h2>
+                    <!-- Proveedor del Beneficio -->
+                    <div class="media">
+                        <show-images [src]="card.urlImageCompany" 
+                                [classImage]="'align-self-start rounded-circle mr-3'" 
+                                [sizeImage]="'50'"
+                                [altImage]='"Consiguelo en " + card.nameEstablishment + " - Descuento Promocionado por " + card.providerBenefit' >
+                        </show-images>
+                        <div class="media-body">
+                            <h3 class="detail-subtitle">{{ card.nameEstablishment }}</h3>
+                            <small class="text-lowercase text-capitalize">{{ card.rubroApp }} </small>
+                        </div>
+                    </div>
+                    <p class="pt-3 text-resumen" [innerHTML]="card.resumenBenefit"></p>
+                </div>
+            </div>
+
+             <!-- Detalle del Beneficio -->
+            <div class="row accordion pt-3">
+                <div id="accordion">
+                    <!-- Descripcion -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <h3>
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>Descripción
+                                </h3>
+                            </button>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body text-justify" [innerHTML]="card.descriptionBenefit"></div>
+                            <div class="card-body pt-0 text-justify" *ngIf="card.linkBenefit">
+                                Usalo ahora en
+                                <a href="{{ card.linkBenefit }}" target="_blank" rel="nofollow noopener noreferrer">
+                                    <i class="fa fa-external-link"></i>
+                                    {{ card.providerBenefit }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Términos y Condiciones -->
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                <h3>
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>Términos y Condiciones
+                                </h3>
+                            </button>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body text-justify" [innerHTML]="card.termsAndConditions"></div>
+                            <div class="card-body pt-0 text-justify">
+                                <small>Descuento aplicable bajo los términos y condiciones de
+                                    <a href="{{ card.linkBenefit }}" target="_blank" *ngIf="card.linkBenefit" rel="nofollow noopener noreferrer">
+                                        <i class="fa fa-external-link"></i>
+                                        {{ card.providerBenefit }}
+                                    </a>
+                                    <strong *ngIf="!card.linkBenefit">{{ card.providerBenefit }}</strong>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sedes -->
+                    <div class="card" *ngIf="sede">
+                        <div class="card-header" id="headingThree">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <h3>
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>Sedes
+                                </h3>
+                            </button>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                <!-- Lista de Sedes -->
+                                <ul class="nav nav-tabs pb-3" role="tablist">
+                                    <li role="presentation" *ngFor="let local of card.locals; let i = index">
+                                        <a class="distrites" [ngClass]="{ 'active': i == 0 }" id="sede-{{i}}" href="#content" (click)="showSedes(local)"  role="tab" data-toggle="tab">
+                                            {{ local.distrito }}
+                                        </a> 
+                                    </li>
+                                </ul>
+                                <!-- Detalle de Sedes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="content">    
+                                        <span class="title-tab">{{ sede.establecimiento }}</span>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <strong>Dirección:</strong>
+                                                <p *ngIf="sede.direccion">{{ sede.direccion }}</p>
+                                                <p *ngIf="!sede.direccion">No disponible</p>
+                                            </div>
+                                            <div class="col-sm-6" *ngIf="sede.horario">
+                                                <strong>Horario:</strong>
+                                                <p>{{ sede.horario }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="container-map" *ngIf="sede.latitud && sede.longitud">
+                                            <ngui-map center="{{ sede.posicion }}" >
+                                                <marker position="{{ sede.posicion }}"></marker>
+                                                <directions-renderer *ngIf="direction"
+                                                  [suppressMarkers]="false"
+                                                  [draggable]="true"
+                                                  panel="#my-panel"
+                                                  [directions-request]="direction">
+                                                </directions-renderer>
+                                            </ngui-map>
+                                            <div id="my-panel" *ngIf="direction"></div>
+                                            <button type="button" class="btn btn-light" *ngIf="!direction && latitude" (click)="goNow(sede.posicion)">
+                                                <img class="icon-btn" alt="Llévame al beneficio ahora" src="../../../assets/img/icon-rute.png">
+                                                <h5 class="d-none d-sm-block d-md-inline">Llévame al Beneficio ahora</h5>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Volver -->
+            <app-navigate-back></app-navigate-back>
+        </ng-container>
+
+    </div>
+</div>
+
+<!-- Incentivo de Descarga -->
+<ng-container *ngIf="!isLogged">
+    <app-show-incentive></app-show-incentive>
+</ng-container>

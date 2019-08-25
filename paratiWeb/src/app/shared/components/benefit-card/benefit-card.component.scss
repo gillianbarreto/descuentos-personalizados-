@@ -1,0 +1,15 @@
+@import "../../../../assets/sass/variables";
+
+h3.card-title, h4.card-subtitle {
+    font-family: 'Roboto', sans-serif;
+}
+h3.card-title {
+    color: $color-4;
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-top: 0;
+}
+h4.card-subtitle {
+    color: $p-font-color; 
+    font-size: 0.95rem;
+} 

@@ -1,0 +1,90 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
+<div class="wrapper">
+  <div class="container">
+
+    <!-- Mensaje -->
+    <div class="message-container" *ngIf="info">
+      <app-navigate-back></app-navigate-back>
+      <app-show-message [info]="info"></app-show-message>
+    </div>
+
+    <!-- Lista -->
+    <ng-container *ngIf="section">
+      <div class="row pt-3">
+        <div class="col-lg-7 col-md-12">
+          <!-- Titulo de la Section -->
+          <h2> {{ section.tittleSection }} </h2>
+          <p class="description pb-3"> {{ section.descriptionSection }} </p>
+        </div>
+        <div class="col-lg-5 col-md-12">
+          <app-navigate-back></app-navigate-back>
+          <p class="counter py-2 text-right">
+            {{ section.benefit.length }} descuentos encontrados
+            <a *ngIf="listRubros && listRubros.length > 1" (click)="showFilter()" 
+                class="btn btn-primary" title="Filtrar Resultados">
+                <ng-container *ngIf="!showFilters"> 
+                   <i class="fa fa-filter" aria-hidden="true"></i>Filtrar 
+                </ng-container>
+                <ng-container *ngIf="showFilters"> 
+                    <i class="fa fa-remove" aria-hidden="true"></i>Quitar Filtro
+                 </ng-container>
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div [ngClass]="{ 'col-md-3': showFilters, 'd-none': !showFilters }" >
+          <!-- Filtros -->
+          <div id="listRubros" class="row py-3" [ngClass]="{ 'd-none': !showFilters }" *ngIf="listRubros">
+            <div class="col-md-12">
+              <ul class="list-group list-group-flush">
+                  <strong>Filtrar por: </strong>
+                  <a (click)="filterRubro(rubro)" *ngFor="let rubro of listRubros" 
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    {{ rubro.name }}
+                    <span class="pl-1 badge badge-primary badge-pill">{{ rubro.total }}</span>
+                  </a>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div [ngClass]="{ 'col-md-9': showFilters, 'col-md-12': !showFilters  }" > 
+          <!-- Card de Beneficios -->
+          <div class="masonry" *ngIf="section.benefit">
+            <ng-container *ngFor="let card of section.benefit | paginate: { itemsPerPage: 30, currentPage: page }">
+              <div class="item">
+                <app-benefit-card [card]="card"></app-benefit-card>
+              </div>
+            </ng-container>
+          </div>
+          <!-- Paginacion -->
+          <div class="text-center pt-2" *ngIf="section.benefit">
+            <pagination-controls
+                [previousLabel]="configPg.previousLabel"
+                [nextLabel]="configPg.nextLabel"
+                (pageChange)="page = $event" >
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+
+      <!-- pie -->
+      <app-navigate-back></app-navigate-back>
+      <div class="text-center incentive" *ngIf="!isLogged">
+          <p class="text-descarga">¿Quieres ver más Descuentos? Descarga
+            <strong>ParaTi</strong> ahora </p>
+          <app-downloadapp></app-downloadapp>
+          <p class="pt-2">También te puedes <a (click)="signUp()" > registrar </a> y echar un vistazo.</p>
+      </div>
+    
+    </ng-container>
+    
+  </div>
+</div>
+
+<!-- Incentivo de Descarga -->
+<div *ngIf="page > 1 && !isLogged">
+  <app-show-incentive></app-show-incentive>
+</div>

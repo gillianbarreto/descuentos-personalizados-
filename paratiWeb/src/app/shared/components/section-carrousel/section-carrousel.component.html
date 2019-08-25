@@ -1,0 +1,26 @@
+<!-- Tiulo de la Section -->
+<h2> {{ section.tittleSection }} </h2>
+<p class="description"> {{ section.descriptionSection }} </p>
+
+<!-- Carousel -->
+<mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" 
+  [animation]="'slide'" [interval]="0">
+  <ng-container *ngFor="let card of slide; let i = index">
+    <mdb-slide>
+      <div class="col-md-4">
+        <app-benefit-card [card]="card[0]"></app-benefit-card>
+      </div>
+      <div class="col-md-4 clearfix d-none d-md-block">
+        <app-benefit-card [card]="card[1]" *ngIf="card[1]"></app-benefit-card>
+      </div>
+      <div class="col-md-4 clearfix d-none d-md-block">
+        <app-benefit-card [card]="card[2]" *ngIf="card[2]"></app-benefit-card>
+      </div>
+    </mdb-slide>
+  </ng-container>
+</mdb-carousel>
+
+<!-- Ver más -->
+<div class="text-center">
+  <a class="ver-todos" [routerLink]="['/descuentos', 'rubros', section.tittleSection ]">Ver Todos</a>
+</div>

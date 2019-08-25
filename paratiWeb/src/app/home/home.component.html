@@ -1,0 +1,105 @@
+<div class="wrapper">
+    
+    <!-- Wellcome -->
+     <div class="page-header wellcome-section">  
+            <div class="container">        
+                <div class="col-12 col-md-5 py-5 float-right">
+                    <div class="wellcome-heading">
+                        <h1>¡El mejor descuento, en el mejor momento y en el mejor lugar!</h1>
+                        <p><strong>Parati</strong> ya está disponible <strong>¡Descárgala ahora!</strong></p>
+                    </div>
+                    <div class="get-start-area text-center pb-2">                          
+                        <app-downloadapp></app-downloadapp>                  
+                    </div>
+                </div>
+            </div>        
+    </div>
+
+    <!-- Counters -->
+    <div class="section feature-section" id="feature-section">
+        <div class="container">   
+            <div class="row">
+                <div class="section-heading pt-3 px-3">
+                    <h2>Los Mejores Descuentos en un sólo lugar ...</h2>
+                </div>
+            </div>
+            <div class="row" *ngIf="totalBenefits > 0">
+                <div class="col-12 col-md-4">
+                    <div class="single-benefit text-center animated bounceIn">
+                       <h3><i class="fa fa-tag" aria-hidden="true"></i>{{ totalBenefits | number }}</h3>
+                       <p>Descuentos</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="single-benefit text-center animated bounceIn">
+                        <h3><i class="fa fa-shopping-bag" aria-hidden="true"></i>{{ totalSources | number }}</h3>
+                        <p>Fuentes</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="single-benefit text-center animated bounceIn">
+                        <h3><i class="fa fa-building-o" aria-hidden="true"></i>{{ totalLocals | number }}</h3>
+                        <p>Establecimientos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Video -->
+    <div class="video-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-10 mx-auto">
+                    <a (click)="showVideo=true" *ngIf="!showVideo" class="animated fadeIn">
+                        <img src="../../assets/img/para-ti-video.jpg" class="img-fluid"
+                         title = "Para Ti app de descuentos"
+                         alt="Para Ti el app que te muestra los mejores descuentos en un sólo lugar">
+                    </a>
+                    <vg-player *ngIf="showVideo">
+                        <video [vgMedia]="media" #media id="singleVideo" 
+                            poster="../../assets/img/videoParaTi.jpg"
+                            preload="auto" autoplay="true" controls>                     
+                            <source src="../assets/videos/para-ti-descuentos.mp4" type="video/mp4">
+                        </video>
+                    </vg-player>
+                </div>
+            </div>
+            <!-- Transcripcion del Video -->
+            <div class="d-none">
+                <p><b>¿Buscas y buscas descuentos y no los consigues? </b> Y es que no los hacen pensando en tí.</p>
+                <p>Muchos, o no te gustan o no los necesitas. Otros, están lejos de donde estás y los que si te gustan, ¡Ya vencieron!</p>
+                <p>¿Por qué no usas <b>ParaTi app?</b> ParaTi te ofrece: </p>
+                <p>Descuentos según tus gustos <br>
+                   Que estén cerca de tí <br>
+                   De todos los Establecimientos <br>
+                </p>
+                <p><b>¡Empieza a disfrutarlo!</b></p>
+                <p> 
+                    Ingresa a Google Play Store ó App Store<br>
+                    Busca "ParaTi descuentos" y ubica nuestro logo.<br>
+                    Instálalo y comienza a disfrutar de los beneficios que tenemos para ti.
+                </p>
+                <p> Síguenos en facebook: 
+                    <a href="https://www.facebook.com/paratiapp/" target="_blank" rel="nofollow noopener noreferrer">
+                        https://www.facebook.com/paratiapp/ 
+                    </a> 
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Rubros -->
+<app-rubros></app-rubros>
+
+<!-- Incentivo de descarga -->
+<div class="text-center pt-5 incentive">
+    <p class="text-descarga">¿Quieres ver más Descuentos? Descarga <strong>ParaTi</strong> ahora </p>
+    <app-downloadapp></app-downloadapp>
+    <p *ngIf="!isLogged" class="pt-2 mt-3">También te puedes <a (click)="signUp()" > registrar </a> y echar un vistazo.</p>
+</div>
+          
+    
+

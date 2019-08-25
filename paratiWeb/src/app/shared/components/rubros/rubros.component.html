@@ -1,0 +1,12 @@
+<div class="container w-90 mx-auto">
+
+  <!-- Loading -->
+  <div class="loader" *ngIf="loading"></div>
+
+  <!-- Rubros -->
+  <ng-container *ngFor="let section of sections">
+    <div class="row" *ngIf="!loading">
+      <app-section-carrousel [section]="section"></app-section-carrousel>
+    </div>
+  </ng-container>
+</div>

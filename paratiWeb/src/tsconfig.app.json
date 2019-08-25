@@ -1,0 +1,23 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "baseUrl": "./",
+    "module": "es2015",
+    "types": [
+      "node"
+    ]
+  },
+  "files": [
+    "../src/app/app.module.ts"
+  ],
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ],
+  "include": [
+    "../node_modules/angular-bootstrap-md/**/*.ts", 
+    "../node_modules/angular-bootstrap-md/index.ts",
+    "../src//*.ts"
+  ]
+}

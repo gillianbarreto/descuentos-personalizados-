@@ -1,0 +1,112 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent" 
+    [ngClass]="{'navbar-with-color': !isHome() }" color-on-scroll="660">
+    <div class="container">
+
+        <!-- Logo -->
+        <div class="navbar-translate col-md-4">
+            <div class="wellcome-logo text-center">
+                <a class="navbar-brand" [routerLink]="['/home']">
+                    <app-show-logo></app-show-logo>
+                </a>
+            </div>
+            <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-expanded="false" aria-label="Toggle navigation" (click)="sidebarToggle()">
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
+            </button>
+        </div> 
+
+        <!-- Barra de Busqueda -->
+        <div class="col-md-4">
+            <form class="navbar-form" (ngSubmit)="searchValue()">
+                <div class="input-group mx-auto">         
+                    <input type="text" id="searchBenefit" value="" class="form-control" pattern="[A-Za-zñáéíóúü0-9% ]{0,30}"
+                           [formControl]="searchBenefit"      
+                           aria-label="Busca el descuento para ti"  
+                           placeholder="Busca el descuento para tí...">
+                    <span class="input-group-addon">
+                        <button *ngIf="searchBenefit.valid" class="btn btn-link" aria-label="Buscar Descuentos" type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+
+        <!-- Opciones -->
+        <div class="collapse navbar-collapse col-md-4" id="navbarToggler">
+            <ul class="navbar-nav ml-auto align-top">
+                <!-- Contacto -->
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="Escríbenos" data-placement="bottom" 
+                        href="#" data-toggle="modal" data-target="#formContactModal" target="_blank" rel="nofollow noopener noreferrer">
+                        Escríbenos
+                        <i class="fa fa-envelope-open" ></i>
+                 </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="Síguenos en Facebook" data-placement="bottom" 
+                        href="https://www.facebook.com/paratiapp/" target="_blank" rel="nofollow noopener noreferrer">
+                        Síguenos
+                        <i class="fa fa-facebook-square"></i>
+                    </a>
+                </li>
+                <!-- Blog -->
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="Consulta nuestro Blog" data-placement="bottom" 
+                        href="http://blog.paratidescuentos.com" target="_blank" rel="nofollow noopener noreferrer">
+                        Blog
+                        <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                </li>
+                <!-- Favoritos -->
+                <li class="nav-item" *ngIf="isLogged">
+                    <a class="nav-link" rel="tooltip" title="Descuentos Favoritos" data-placement="bottom" 
+                        [routerLink]="['/descuentos','favoritos','todos']" >
+                        Favoritos
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <!-- Ver Mas Tarde -->
+                <li class="nav-item" *ngIf="isLogged">
+                    <a class="nav-link" rel="tooltip" title="Descuentos que elegí ver más tarde" data-placement="bottom" 
+                        [routerLink]="['/descuentos','ver-mas-tarde','todos']">
+                        MásTarde
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <!-- Login -->
+                <li class="nav-item" *ngIf="!isLogged">
+                    <a class="nav-link" rel="tooltip" title="Inicia Sesión" data-placement="bottom" 
+                        href="#" data-toggle="modal" data-target="#formLoginModal">
+                        Login 
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <!-- Usuario Logeado -->
+                <li class="nav-item" *ngIf="isLogged">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-link nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Hola,{{ alias }}
+                            <i class="fa fa-user-circle ml-2"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" type="button" [routerLink]="['/user-profile']">
+                                <i class="fa fa-fw fa-user-o"></i> Editar Perfil
+                            </a>
+                            <a class="dropdown-item" type="button" (click)="onLoggedout()" href="javascript:void(0)">
+                                <i class="fa fa-fw fa-power-off"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Modal Contact -->
+<app-form-contact></app-form-contact>
+
+<!-- Modal Login -->
+<app-login></app-login>

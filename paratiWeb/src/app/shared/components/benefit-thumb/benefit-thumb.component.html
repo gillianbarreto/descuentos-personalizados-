@@ -1,0 +1,69 @@
+<!-- Mensaje -->
+<div class="message-container" *ngIf="info">
+    <app-show-message [info]="info"></app-show-message>
+</div>
+
+<div class="image-base">
+
+    <!-- Imagen Descuento  -->
+    <a (click)="showDetail()" *ngIf="!card.detail">
+        <show-images [src]="card.urlImageBenefit" 
+                    [classImage]="classImg"
+                    [sizeImage]="sizeImg" 
+                    [altImage]="altImg">
+        </show-images>
+    </a>
+    
+    <show-images *ngIf="card.detail"
+        [src]="card.urlImageBenefit" 
+        [classImage]="classImg"
+        [sizeImage]="sizeImg" 
+        [altImage]="altImg">
+    </show-images>
+
+   <!-- Logo Proveedor -->
+   <img class="logo-provider" src="{{ card.urlProviderBenefitIcon }}" alt="Consigue en este descuento: {{ card.tags }}" />
+    
+   <!-- Flags Favoritos - si está logeado -->
+    <button type="button" class="btn btn-favorite" (click)="favorito()" *ngIf="isLogged && !card.destacados && !card.favoriteList && !card.seeLaterList">
+        <!-- placement="{{placeTooltip}}" ngbTooltip="{{altFavorito}}"> -->
+        <img class="icon-btn" alt="{{altFavorito}}" src="../../../assets/img/icon-favorite.png" *ngIf="!flag.flagFavoritos">
+        <img class="icon-btn" alt="{{altFavorito}}" src="../../../assets/img/icon-favorite-on.png" *ngIf="flag.flagFavoritos">
+    </button>
+
+    <!-- Eliminar de la Lista -->
+    <a *ngIf="isLogged && (card.seeLaterList || card.favoriteList) && !card.detail"
+        class="btn btn-favorite"
+        mwlConfirmationPopover
+        [popoverTitle]="'¿Desea quitar de la Lista?'"
+        [popoverMessage]="''"
+        [cancelText]="'No'"
+        [confirmText]="'Si'"
+        placement="left"
+        (confirm)="deleteItemList()"
+        (cancel)="cancelDeleteItemList()">
+        <img class="icon-btn" alt="Eliminar de la Lista" src="../../../assets/img/icon-delete-list.png">
+    </a>
+     
+    <!-- Flags - si está logeado -->
+    <div class="container-btn" *ngIf="isLogged && !card.destacados">
+        <button type="button" class="btn btn-light" (click)="meInteresa()">
+            <!-- placement="{{placeTooltip}}" ngbTooltip="{{altMeInteresa}}"> -->
+            <img class="icon-btn" alt="{{altMeInteresa}}" src="../../../assets/img/icon-like.png" *ngIf="!flag.flagMeInteresa">
+            <img class="icon-btn" alt="{{altMeInteresa}}" src="../../../assets/img/icon-like-on.png" *ngIf="flag.flagMeInteresa">
+            <span class="d-none d-sm-block">Me Interesa</span>
+        </button>
+        <button type="button" class="btn btn-light" (click)="noMeInteresa()">
+            <!-- placement="{{placeTooltip}}" ngbTooltip="{{altNoMeInteresa}}"> -->
+            <img class="icon-btn" alt="{{altNoMeInteresa}}" src="../../../assets/img/icon-dislike.png" *ngIf="!flag.flagNoMeInteresa">
+            <img class="icon-btn" alt="{{altNoMeInteresa}}}"src="../../../assets/img/icon-dislike-on.png" *ngIf="flag.flagNoMeInteresa">
+            <span class="d-none d-sm-block">No me Interesa</span>
+        </button>
+        <button type="button" class="btn btn-light" (click)="verMasTarde()" *ngIf="!card.carousel && (card.detail || !card.seeLaterList)">
+            <!-- placement="{{placeTooltip}}" ngbTooltip="{{altVerMasTarde}}"> -->
+            <img class="icon-btn"  alt="{{altVerMasTarde}}" src="../../../assets/img/icon-see-later.png" *ngIf="!flag.flagVerMasTarde">
+            <img class="icon-btn"  alt="{{altVerMasTarde}}" src="../../../assets/img/icon-see-later-on.png" *ngIf="flag.flagVerMasTarde">
+            <span class="d-none d-sm-block">Ver más tarde</span>
+        </button>
+    </div>
+</div>

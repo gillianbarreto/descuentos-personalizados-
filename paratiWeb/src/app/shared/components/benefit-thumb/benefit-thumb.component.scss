@@ -1,0 +1,68 @@
+@import "../../../../assets/sass/variables";
+
+img {
+    border-radius: 24px;
+    width: 100% !important;
+}
+.image-base{
+    position: relative;
+}
+.logo-provider {
+    position:absolute;
+    top:15px;
+    left:15px;
+    border:none;
+    height: auto !important;
+    max-width: 25%;
+    max-height: 25%;
+    filter: drop-shadow(5px 5px 10px rgb(12, 12, 12));
+}
+.container-btn {
+    margin: 0 auto;
+    margin-top: 2px; 
+    text-align: center;
+    width: auto;
+    z-index: 100;
+    background-color: white !important;
+}
+.btn-light {
+    color: $color-4 !important;
+    padding: 5px !important;
+    font-size: 0.7rem !important;
+    margin: 0;
+    border: none !important;
+    background-color: white !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    img {
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+}
+.btn-favorite {
+    position:absolute;
+    top:15px;
+    right:15px;
+    background-color: transparent !important;
+    padding: 2px;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    img {
+        border-radius: none !important;
+        filter: drop-shadow(1px 1px 1px rgba($color-2,0.2));
+    }
+}
+.icon-btn {
+    display: block;
+    max-width: 25px;
+    max-height: 25px;
+    margin: 0 auto;
+}
+
+.popover.popover-left, .popover.bs-tether-element-attached-right {
+    margin-left: 5px !important;
+    z-index: 100 !important;
+}
+
+

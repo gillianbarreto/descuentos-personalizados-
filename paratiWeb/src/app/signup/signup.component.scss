@@ -1,0 +1,342 @@
+@import "../../assets/sass/variables";
+
+.wrapper {
+    background: #ffffff url("../../assets/img/bg-form-sign-up.png") no-repeat left top;
+}
+.container {
+    padding-top: 100px;
+    width: 50%
+}
+
+/* Pantalla inicial */
+.wellcome {
+    background-color: $color-1;
+    color: white !important;
+    width: 75%;
+    border-radius: $b-radius !important;
+    margin: 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem; 
+    small {
+        color: white;
+        text-align: center !important;
+    }
+    h2 {
+        color: $color-3 !important;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .btn {
+        width: 100% !important;
+        display: block !important;
+        height: auto;
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        border-radius: $b-radius !important;
+        i {
+            font-size: $i-font-size;
+            padding-right: 1.5rem !important;
+        }
+    }
+    .btn-primary {
+        background-color: white !important;
+        color: $color-1 !important;
+        i {
+            color: $color-1 !important;
+        }
+    }
+    .btn-success{
+        background-color: transparent !important;
+        border: white 2px solid !important;
+        color: white !important;
+        margin-top: 1rem;
+        i {
+            color: white !important;
+        }
+    }
+    .btn-primary:hover, .btn-success:hover {
+        background-color: $color-3 !important;
+        border: $color-3 2px solid !important;
+        color: $color-1 !important;
+        -webkit-transition-duration: 500ms;
+        -o-transition-duration: 500ms;
+        transition-duration: 500ms;
+        i {
+            color: $color-1 !important;
+        }
+    }
+    p {
+        color: white;
+        font-size: 90%;
+    }
+    a {
+        color: $color-3;
+        a:hover { 
+            text-decoration: underline; 
+            
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .container {
+        width: 90%;
+        padding-top: 150px;
+    } 
+    .wellcome {
+        width: 100%;
+        margin: 20px 0 !important;
+        padding: 10px;
+    }
+} 
+
+/* Stepper */
+.steps-form {
+    display: table;
+    width: 100%;
+    position: relative;
+    margin-top: 2rem;
+}
+.steps-form .steps-row {
+    display: table-row; }
+.steps-form .steps-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 2px;
+    background-color: $color-1; }
+.steps-form .steps-row .steps-step {
+    display: table-cell;
+    text-align: center;
+    position: relative; }
+.steps-form .steps-row .steps-step p {
+    margin-top: 0.5rem; }
+.steps-form .steps-row .steps-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important; }
+.steps-form .steps-row .steps-step .btn-circle {
+    width: 70px;
+    height: 70px;
+    border: 2px solid $color-2;
+    background-color: white !important;
+    color: $color-2 !important;
+    border-radius: 50%;
+    padding: 22px 18px 15px 18px;
+    margin-top: -22px; } 
+// .steps-form .steps-row .steps-step .btn-circle:hover, 
+.steps-form .steps-row .steps-step .step-active {
+    border: 2px solid $color-2;
+    color: $color-1 !important;
+    background-color: $color-3 !important; }
+.steps-form .steps-row .steps-step .btn-circle .fa {
+    font-size: 1.7rem; 
+}
+
+/* Botones */
+#signUpForm, #profileForm  {
+    p {
+        padding-bottom: 2rem;
+        color: $p-font-color;
+    }
+    a {
+        color: $color-2 !important;
+        font-weight: 600;
+    }
+    strong{
+        color: $color-2;
+        font-weight: bold;
+    }
+    .btn {
+        min-width: 140px;
+        padding: 10px;
+        display: block !important;
+        height: auto;
+        font-weight: bold;
+        font-size: 1.1rem;
+        border-radius: $b-radius !important;
+        i {
+            font-size: $i-font-size;
+            padding-right: 0.8rem !important;
+        }
+    }
+    .btn-primary, 
+    .btn-primary:active, 
+    .btn-primary:visited  {
+        background-color: $color-3 !important;
+        color: $color-1 !important;
+        i {
+            color: $color-1 !important;
+        }
+        i.text-success {
+            color: $color-3 !important;
+        }
+    }
+    .login-fb.btn-primary, 
+    .login-fb.btn-primary:active, 
+    .login-fb.btn-primary:visited  {
+        background-color: transparent !important;
+        border-color: $color-1 !important;
+        border-radius: 0 !important;
+        margin: 0px;
+        text-align: left;
+        font-weight: 400;
+    }
+    .btn-primary:hover {
+        background-color: $color-1 !important;
+        color: white !important;
+        -webkit-transition-duration: 500ms;
+        -o-transition-duration: 500ms;
+        transition-duration: 500ms;
+        i {
+            color: white !important;
+        }
+    }
+    .btn-secondary {
+        background-color: transparent !important;
+        color: $color-1 !important;
+    }
+    .btn-secondary:hover {
+        background-color: rgba($color-2,0.5) !important;
+    }
+    .form-control {
+        color: $p-font-color;
+        padding: 0px 10px !important;
+        margin-bottom: 0 !important;
+        border: none;
+        border-bottom: $color-1 1px solid !important;
+        border-radius: 0 !important;
+    }
+    .form-control:focus, #tipoDocumento:focus {
+        box-shadow: 0 0 0 0.2rem rgba($color-2, 0.25);
+        border: rgba($color-2, 0.25) solid 1px !important;
+        border-radius: $b-radius $b-radius $b-radius 0 !important;
+        color: $p-font-color;
+    }
+    input:-webkit-autofill {
+        -webkit-text-fill-color: $p-font-color !important;
+        -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+        transition: white 5000s ease-in-out 0s !important;
+    }
+    .form-check-inline {
+        font-size: 1rem;
+        color: $p-font-color;
+        font-family: $p-font-family !important;
+    }
+    select.form-control:not([size]):not([multiple]) {
+        height: 2.1rem !important;
+    }
+    #nombres,
+    #correo,
+    #apellidos,
+    #codigoOtp,
+    #alias,
+    #telefono,
+    #tipoDocumento,
+    #numeroDocumento,
+    #codigoReferido {
+        height: 2.5rem !important;
+        box-sizing: inherit !important;
+    }
+}
+
+/* Iconos */
+.icon-email {
+    padding: 35px 15px !important;
+    background-color: $color-1 !important;
+    width: 150px;
+    margin: 0 auto;
+    border-radius: 100px;
+}
+
+/* Lista de Fuentes */
+#step-2 {
+    small {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+}
+#step-3 {
+    a {
+        color: $color-1;
+    }
+}
+
+#step-4 {
+    .card {
+        background-color: rgba($color-4, 0.8);
+        text-align: center;
+        padding: 15px 25px; 
+        margin: 5px;
+        height: 70px;
+        img {
+            margin: 0;
+            padding: 0;
+            max-height: 45px;
+        }
+    }
+    .card-columns {
+        column-count: 3;
+   
+        @media (max-width: 597px) {
+            column-count: 1;
+        }
+        @media (max-width: 1200px) {
+            column-count: 2;
+        }
+        @media (min-width: 1400px) {
+            column-count: 4;
+        }
+    }
+    .form-check {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+    }
+    .form-check-sign::before,  // chulito en disabled
+    .form-check-sign::after{
+        width: 25px;
+        height: 25px;
+        border-radius: 15px;
+        background-color: transparent;
+        border: 1px solid white;
+    } 
+    .form-check-label input[type="checkbox"]:checked + .form-check-sign:before{
+        background-color: $color-3;
+    }
+    .form-check .form-check-sign::after {
+        color: $color-1 !important;
+    }
+}
+
+/* Labels */
+.label-perfil {
+    display: block;
+    color: $color-2;
+    font-weight: bold;
+    margin: 0;
+    padding-top: 1rem;
+}
+
+.data-perfil {
+    font-size: 1.1rem;
+}
+.image-usr {
+    padding: 25px !important;
+    background-color: $color-2;
+    background-size: 70% !important;
+    display: inline-flex;
+    border-radius: 50% / 50% 0 50% 50%;
+    float: right !important;
+    -webkit-box-shadow: 10px 10px 46px -12px rgba($color-2,1);
+    -moz-box-shadow: 10px 10px 46px -12px rgba($color-2,1);
+    box-shadow: 10px 10px 46px -12px rgba($color-2,1);
+}
+
+small {
+    font-size: 0.70rem !important;
+    line-height: 0.5 !important;
+    padding: 0px;
+}

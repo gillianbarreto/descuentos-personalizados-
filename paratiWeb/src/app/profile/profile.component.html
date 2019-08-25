@@ -1,0 +1,120 @@
+ <!-- Feedback -->
+<app-show-alert [messageAlert]="messageAlert" [classAlert]="classAlert" *ngIf="messageAlert"></app-show-alert>
+
+<div class="wrapper">
+
+        <div class="container">
+
+            <app-navigate-back></app-navigate-back>
+    
+            <form #profileForm="ngForm" id="profileForm" class="mx-auto mb-5" *ngIf="isLogged"
+                  (ngSubmit)="sendData(profileForm)" novalidate>  
+    
+                <!-- Datos Basicos -->
+                <div class="row step-content" id="step-1" *ngIf="showDatosBasicos">
+                    <div class="col-md-10 mx-auto data-perfil">
+                
+                        <h3 class="pl-0 m-0">
+                             Hola, {{ data.alias }}
+                             <div class="image-usr">
+                                <show-images [src]="data.rutaFotoLarge"  
+                                    [classImage]="'float-right rounded-circle img-shadow'" 
+                                    [sizeImage]="'80'" 
+                                    [altImage]='"Perfil de " + data.alias'>
+                                </show-images>
+                            </div>
+                        </h3>
+                       
+                        <p class="pb-3"> </p>
+                        <div class="col-12">
+                            <label class="label-perfil">Nombres y Apellidos</label>
+                            {{ data.nombres }}
+                            {{ data.apellidos }}
+                        </div>
+                        <div class="col-12">
+                            <label class="label-perfil">Correo</label>
+                            {{ data.correo }}
+                        </div>
+                        <div class="col-12">
+                            <label class="label-perfil">Documento</label>
+                            {{ data.tipoDocumento }}
+                            {{ data.numeroDocumento }} 
+                        </div>
+                        <div class="col-12">
+                            <label class="label-perfil">Teléfono</label>
+                            {{ data.telefono }}
+                        </div>
+                        <div class="col-12">
+                            <label class="label-perfil">Código Promoción</label>
+                            {{ data.codigoPromocion }}
+                            <br><small>¡Compártelo con tus amigos y familiares para que se registren con tu Código de Promoción! </small>
+                       </div>
+
+                        <!-- Fuentes -->
+                        <div class="col-12 pb-0 pt-2">
+                            <button type="button" class="btn btn-primary w-100 login-fb" (click)="editSuscriptions()">
+                                <span class="d-sm-inline-block"> 
+                                    Mis Fuentes 
+                                </span>
+                                <span class="float-right" *ngIf="data.suscripcionesCodigo"> 
+                                    ({{ data.suscripcionesCodigo.length }})
+                                </span>
+                            </button>
+                        </div>
+
+                        <!-- Login a Facebook -->
+                        <div class="col-12 pb-2 pt-0">
+                            <button type="button" class="btn btn-primary w-100 login-fb" (click)="signInWithFB()">
+                                <i class="fa" [ngClass]="{ 'fa-facebook-official rounded': !spinner, 'fa-spinner fa-spin': spinnerFb }" aria-hidden="true"></i>
+                                <span *ngIf="!data.tokenRedSocial && !data.idRedSocial"> 
+                                    Conectar con Facebook 
+                                </span>
+                                <!-- class="d-none d-sm-inline-block" -->
+                                <span *ngIf="data.tokenRedSocial || data.idRedSocial"> 
+                                    Conectado con Facebook 
+                                </span>
+                                <i class="fa fa-check float-right pr-2 text-success" aria-hidden="true" *ngIf="data.tokenRedSocial || data.idRedSocial"></i>
+                            </button>
+                            <small *ngIf="!data.tokenRedSocial && !data.idRedSocial">Ayúdanos conocerte mejor. Jamás publicaremos sin tu permiso</small>
+                        </div>
+                
+                    </div>
+                </div>
+
+                 <!-- Suscripciones -->
+                <div class="row step-content" id="step-4" *ngIf="!showDatosBasicos">
+                    <div class="col-md-10 mx-auto">
+                        <h3 class="pl-0 m-0">Tus Suscripciones!</h3> 
+                        <p class="pb-0">¿Eres suscriptor de algún programa de descuentos? Marca las empresas con las cuáles tienes suscripción.</p>
+                        <p class="text-right my-0 py-1 font-italic" id="totalSources" [innerHTML]="messageTotalSources"></p>
+                        <div class="card-columns">
+                            <ng-container *ngFor="let source of availableSources; let i = index">
+                                <div class="card no-transition">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" 
+                                                    id="fuente-{{source.id}}" name="fuente-{{source.id}}"
+                                                    [ngModel]="source.checked"
+                                                  (click)="totalSources()" value="{{source.id}}">
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                    <img class="img-fluid" [src]="source.imgLogoFuente" [alt]="source.fuenteDescuento">
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div class="py-2">          
+                            <button class="btn btnPrev btn-secondary float-left" type="button" (click)="btnPrevSuscriptions(profileForm.value)">
+                                <i class="fa fa-arrow-left pr-2" aria-hidden="true"></i> Volver
+                            </button>
+                            <button class="btn btnNext btn-primary float-right" type="submit">
+                                <i class="fa fa-spinner fa-spin py-1" aria-hidden="true" *ngIf="spinner"></i>
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+          
+        </div>
+    </div>

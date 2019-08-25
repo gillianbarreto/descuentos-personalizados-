@@ -1,0 +1,57 @@
+<!-- Modal Login -->
+<div class="modal fade" id="formLoginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="px-3 pb-2">
+          <div class="pt-3 text-center">
+            <app-show-logo></app-show-logo>
+            <h2 class="pt-5 pb-3">Iniciar Sesión</h2>
+          </div>
+          <form #loginForm="ngForm" class="mx-auto" id="loginForm" (ngSubmit)="loginData(loginForm)" novalidate>
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- Login a Facebook -->
+                <div class="py-2">
+                  <button type="button" class="btn btn-primary" (click)="signInWithFB(loginForm)">
+                    <i class="fa"
+                      [ngClass]="{ 'fa-facebook-official rounded': !spinner, 'fa-spinner fa-spin': spinnerFb }"
+                      aria-hidden="true"></i>
+                    <span>Entrar con Facebook</span>
+                  </button>
+                </div>
+                <div class="form-group mt-2 py-2">
+                  <input type="email" class="form-control" id="emailLogin" name="emailLogin" ngModel
+                    #emailLogin="ngModel" email required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                    placeholder="Tu e-mail *">
+                  <span class="text-danger small" *ngIf="!emailLogin.valid && emailLogin.touched">
+                    Escribe un email válido
+                  </span>
+                </div>
+              </div>
+              <div class="col-lg-12 pb-5">
+                <div class="mt-2">
+                  <button type="submit" class="btn btn-success" [ngClass]="{ 'disabled': !emailLogin.valid }"
+                    [disabled]="!emailLogin.valid">
+                    <i class="fa" [ngClass]="{ 'fa-sign-in': !spinner, 'fa-spinner fa-spin': spinner }"
+                      aria-hidden="true"></i>
+                    <span> Iniciar Sesión </span>
+                  </button>
+                </div>
+                <p class="mt-4">¿Aún no te registras?
+                  <a (click)="signUp()">Hazlo ahora</a>
+                </p>
+                <div id="success"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

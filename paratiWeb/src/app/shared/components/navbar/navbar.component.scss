@@ -1,0 +1,165 @@
+@import "../../../../assets/sass/variables";
+
+/* Nav */
+.navbar{
+    background: $color-1;
+}
+.navbar-with-color {
+    background-color: $color-1 !important;
+}
+.nav-link > i {
+    font-size: 1.4rem;
+}
+.nav-link, .btn-link {
+    margin: 15px 0 !important;
+    padding: 10px 5px !important;
+    color: white !important;
+}
+a:hover {
+    color: white;
+}
+.navbar.navbar-transparent {
+    padding-top: 5px;
+}
+// Pantallas pequeñas
+@media (max-width: 991px) {
+    .navbar-form {
+       padding-bottom: 15px;
+    }
+}
+// Pantallas medianas en adelante
+@media (min-width: 992px) {
+    .navbar-form {
+       padding-bottom: 0;
+    }
+    .nav-item {
+        .nav-link {
+            text-align: center !important;
+            align-content: center !important;
+            font-weight: normal !important;
+            i {
+                display: block;
+                margin: 0 auto !important;
+            }
+        }
+    }
+    .btn-group  {
+        button {
+            i {
+                display: block;
+               // padding-top: 5px;
+               // padding-bottom: 2px;
+            }
+         }
+    }
+   
+}
+
+/* Form */
+input.form-control {
+    margin-right: 0;
+    padding-left: 1rem !important;
+}
+.input-group .form-control {
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+} 
+input:focus {
+    border-color: white !important
+}
+form .btn-link {
+    padding: 5px !important;
+    margin: auto 0 !important;
+    i {
+        color: white !important;
+        padding-right: 0 !important;
+    }
+} 
+.form-control::-webkit-input-placeholder {
+    color: $ph-font-color;
+    opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+    color: $ph-font-color;
+    opacity: 1;
+}
+.form-control::-ms-input-placeholder {
+    color: $ph-font-color;
+    opacity: 1;
+}
+.form-control::placeholder {
+    color: $ph-font-color;
+    opacity: 1;
+}
+
+/* Form Modal */
+.modal {
+    .modal-body {
+        padding: 2rem;
+        p {
+            color: $p-font-color;
+        }
+    }
+    .form-control {
+        color: $p-font-color;
+        padding: 0px 10px !important;
+        margin-bottom: 0 !important;
+        border: none;
+        border-bottom: $color-1 1px solid !important;
+        border-radius: 0 !important;
+    }
+    .btn {
+        height: 48px;
+        font-weight: bold;
+        border-radius: $b-radius !important;
+        font-size: 1.1rem;
+    }
+}
+
+/* DropDown */
+.navbar .dropdown-menu a {
+    color: $color-1 !important;
+}
+.navbar .dropdown-menu a:hover {
+    color: $color-3 !important;
+    background-color: $color-2 !important;
+}
+
+/* NavBar Toggle */
+@media screen and (max-width: 991px) {
+    .navbar-toggler {
+        padding-left: 10px !important;
+    }
+    .navbar-collapse .navbar-nav > .nav-item {
+        border-bottom: 2px solid $color-1 !important;
+    }
+    .navbar-collapse .navbar-nav > .nav-item > .nav-link {
+        color: $p-font-color !important;
+    }
+    .navbar-collapse .navbar-nav > .nav-item > .nav-link:hover, 
+    .navbar-collapse .navbar-nav > .nav-item > .nav-link:active, 
+    .navbar-transparent .navbar-nav .nav-item .nav-link:hover:not(.social) {
+        color: $color-1 !important;
+        background-color: $color-3 !important;
+    }
+    .navbar .navbar-nav .dropdown-menu {
+        height: 400px;
+        overflow-y: auto;
+    }
+    a.nav-link, .btn-link {       
+        margin: 0 !important;
+        padding: 10px 10px !important;
+        color: $p-font-color !important;
+        text-transform: none !important;
+        vertical-align: text-top !important;
+        i {
+            float: left !important;
+            padding-right: 2rem !important;
+            margin: 0 auto;
+        }
+    } 
+    .navbar .navbar-nav .dropdown-menu {
+        height: auto;
+    } 
+}

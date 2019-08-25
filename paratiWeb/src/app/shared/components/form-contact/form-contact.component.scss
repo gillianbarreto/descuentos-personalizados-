@@ -1,0 +1,84 @@
+@import "../../../../assets/sass/variables";
+
+/* Modal Contacto */
+#formContactModal.modal {
+    .modal-header {
+        background-color: $color-1;
+        h3 {
+            color: white;
+        }
+    }
+    .modal-content {
+        border-radius: $b-radius !important;
+    }
+    select.form-control:not([size]):not([multiple]) {
+        height: 2.1rem !important;
+    }
+    .form-control {
+        color: $p-font-color;
+        padding: 0px 10px !important;
+        margin-bottom: 0 !important;
+        border: none;
+        border-bottom: $color-1 1px solid !important;
+        border-radius: 0 !important;
+    }
+    .form-control:focus, #tipo:focus {
+        box-shadow: 0 0 0 0.2rem rgba($color-2, 0.25);
+        border: rgba($color-2, 0.25) solid 1px !important;
+        border-radius: $b-radius $b-radius $b-radius 0 !important;
+        color: $p-font-color;
+    }
+    input:-webkit-autofill {
+        -webkit-text-fill-color: $p-font-color !important;
+        -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+        transition: white 5000s ease-in-out 0s !important;
+    }
+    #name, 
+    #email,
+    #phone,
+    #documentType,
+    #documentNumber {
+        height: 2.5rem !important;
+        box-sizing: inherit !important;
+    }
+    #comment {
+        padding: 10px !important;
+        height: 8rem !important;
+    }
+    .btn {
+        height: 48px;
+        font-weight: bold;
+        border-radius: $b-radius;
+        font-size: 1.1rem;
+    }
+    .btn-primary {
+        background-color: $color-3;
+        color: $color-1 !important;
+        i {
+            color: $color-1 !important;
+        }
+    }
+    .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+        background-color: $color-1 !important;
+        color: white !important;
+        -webkit-transition-duration: 500ms;
+        -o-transition-duration: 500ms;
+        transition-duration: 500ms;
+        i {
+            color: white !important;
+        }
+    }
+    .btn-secondary {
+        background-color: transparent !important;
+        color: $color-1 !important;
+    }
+    #feedback {
+        font-size: 1.1rem;
+        border-radius: $b-radius !important;
+    }
+}
+#formContactModal {
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+

@@ -1,0 +1,13 @@
+<ngui-in-view>
+  <div *ngIf class="card no-transition">
+    <div class="card-body">
+      <a (click)="showDetail()">
+        <h3 class="card-title">{{ card.nameBenefit }}</h3>
+        <h4 class="card-subtitle mb-2 text-muted">{{ card.nameEstablishment }}</h4>
+      </a>
+    </div>
+    <div class="card-media">
+      <app-benefit-thumb [card]="card"></app-benefit-thumb>
+    </div>
+  </div>
+</ngui-in-view>

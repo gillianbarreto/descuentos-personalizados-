@@ -1,0 +1,340 @@
+<div class="wrapper">
+
+  <div class="container">
+
+    <!-- Feedback -->
+    <app-show-alert [messageAlert]="messageAlert" *ngIf="messageAlert" [classAlert]="classAlert"></app-show-alert>
+
+    <!-- Bienvenida -->
+    <div class="step-content wellcome animated fadeInUp mt-3" *ngIf="initial && !isLogged">
+      <div class="pt-5 text-center">
+        <app-show-logo></app-show-logo>
+        <h2 class="pt-5 pb-3">¡Bienvenido!</h2>
+      </div>
+
+      <div class="col-lg-11 col-sm-12 mx-auto">
+        <!-- Login a Facebook -->
+        <button type="button" class="btn btn-primary w-100 login-fb" (click)="signInWithFB()" *ngIf="!disconnect">
+          <i class='fa' [ngClass]="{'fa-facebook-official rounded': !spinnerFb, 'fa-spinner fa-spin': spinnerFb }"
+            aria-hidden="true"></i>
+          <span class="d-sm-inline-block">Registrate con Facebook </span>
+        </button>
+        <small *ngIf="!disconnect">Si te registras con facebook, te daremos mejores recomendaciones. Jamás publicaremos
+          sin tu permiso</small>
+        <button type="button" class="btn btn-primary w-100 login-fb" (click)="signOutFB()" *ngIf="disconnect">
+          <i class='fa' [ngClass]="{'fa-facebook-official rounded': !spinnerFb, 'fa-spinner fa-spin': spinnerFb }"
+            aria-hidden="true"></i>
+          <span class="d-sm-inline-block">Cambiar de Usuario</span>
+        </button>
+        <!-- Registrar con correo -->
+        <button type="button" class="btn btn-success" (click)="signInEmail()">
+          <span class="d-sm-inline-block"> Regístrate con Correo </span>
+        </button>
+        <p class="mt-3">¿Ya estás registrado?
+          <a title="Inicia Sesión" href="#" data-toggle="modal" data-target="#formLoginModal">
+            Accede aquí
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Stepper -->
+    <div class="steps-form" *ngIf="!initial && !isLogged">
+      <div class="steps-row d-flex justify-content-between">
+        <div class="steps-step">
+          <a type="button" class="btn btn-circle ml-0" [ngClass]="{ 'step-active': showStep1 }" data-toggle="tooltip"
+            data-placement="top" title="Dinos quién eres">
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="steps-step">
+          <a type="button" class="btn btn-circle" [ngClass]="{ 'step-active': showStep2 }" data-toggle="tooltip"
+            data-placement="top" title="Cuéntanos más sobre ti">
+            <i class="fa fa-vcard-o" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="steps-step">
+          <a type="button" class="btn btn-circle" [ngClass]="{ 'step-active': showStep3 }" data-toggle="tooltip"
+            data-placement="top" title="¿Quién te recomendó ParaTi?">
+            <i class="fa fa-file-o" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="steps-step">
+          <a type="button" class="btn btn-circle" [ngClass]="{ 'step-active': showStep4 }" data-toggle="tooltip"
+            data-placement="top" title="¿Tienes suscripciones?">
+            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="steps-step">
+          <a type="button" class="btn btn-circle mr-0" [ngClass]="{ 'step-active': showStep5 }" data-toggle="tooltip"
+            data-placement="top" title="¡Listo!">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <form #signUpForm="ngForm" id="signUpForm" class="mx-auto mb-5" *ngIf="!initial" (ngSubmit)="sendData(signUpForm)"
+      novalidate>
+
+      <!-- Datos Basicos -->
+      <div class="row step-content" id="step-1" *ngIf="showStep1">
+        <div class="col-md-9 mx-auto">
+          <h3 class="pl-0 mt-3">
+            Hola, queremos conocerte!
+            <div class="image-usr">
+              <show-images [src]="data.rutaFotoLarge" [classImage]="'float-right rounded-circle img-shadow'"
+                [sizeImage]="'80'" [altImage]='"Perfil de " + data.alias'>
+              </show-images>
+            </div>
+          </h3>
+          <p class="pb-2">Ingresa tus datos</p>
+          <!-- Nombres -->
+          <div class="col-12">
+            <div class="form-group">
+              <label class="label-perfil d-none pt-0">Nombre</label>
+              <input type="text" class="form-control" id="nombres" name="nombres" autofocus [(ngModel)]="data.nombres"
+                #nombres="ngModel" required pattern="([A-Za-zñáéíóúü]{2,24}[ ]{0,1})+" placeholder="Tu nombre *">
+              <span class="text-danger small" *ngIf="!nombres.valid && nombres.touched">
+                Escribe un nombre válido (sólo letras)
+              </span>
+            </div>
+          </div>
+          <!-- Apellidos -->
+          <div class="col-12">
+            <div class="form-group">
+              <label class="label-perfil d-none pt-0">Apellido</label>
+              <input type="text" class="form-control" id="apellidos" name="apellidos" [(ngModel)]="data.apellidos"
+                #apellidos="ngModel" required pattern="([A-Za-zñáéíóúü]{2,24}[ ]{0,1})+" placeholder="Tu apellido *">
+              <span class="text-danger small" *ngIf="!apellidos.valid && apellidos.touched">
+                Escribe un apellido válido (sólo letras)
+              </span>
+            </div>
+          </div>
+          <!-- Alias -->
+          <div class="form-group col-md-8">
+            <label class="label-perfil d-none pt-0">¿Cómo te llamamos?</label>
+            <input type="text" class="form-control" id="alias" name="alias" [(ngModel)]="data.alias" #alias="ngModel"
+              pattern="([A-Za-zñáéíóúü]{2,15})+" placeholder="Tu alias">
+            <span class="text-danger small" *ngIf="!alias.valid && alias.touched">
+              Escribe un alias para identificarte (sólo letras)
+            </span>
+          </div>
+          <!-- e-mail -->
+          <div class="col-12">
+            <div class="form-group">
+              <label class="label-perfil d-none pt-0">Correo</label>
+              <input type="email" class="form-control" id="correo" name="correo" [(ngModel)]="data.correo"
+                #correo="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                placeholder="Tu e-mail *">
+              <span class="text-danger small" *ngIf="!correo.valid && correo.touched">
+                Escribe un email válido
+              </span>
+            </div>
+          </div>
+          <!-- Botones de Navegacion -->
+          <div class="py-3">
+            <button class="btn btnPrev btn-secondary float-left" type="button" (click)="btnPrevBasicData()">
+              <i class="fa fa-arrow-left pr-2" aria-hidden="true"></i> Volver
+            </button>
+            <button class="btn btnNext btn-primary float-right" type="button"
+              (click)="btnNextBasicData(signUpForm.value)"
+              [ngClass]="{ 'disabled': (!correo.valid || !apellidos.valid || !nombres.valid || !alias.valid) }"
+              [disabled]="!correo.valid || !nombres.valid || !apellidos.valid || !alias.valid">
+              <i class="fa fa-spinner fa-spin py-1" aria-hidden="true" *ngIf="spinner"></i>
+              Siguiente
+              <i class="fa fa-arrow-right pl-1" aria-hidden="true" *ngIf="!spinner"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Datos personales -->
+      <div class="row step-content" id="step-2" *ngIf="showStep2">
+        <div class="col-md-9 mx-auto">
+          <h3 class="pl-0 mt-3">Mejora tus recomendaciones</h3>
+          <p class="pb-2">Con estos datos podemos hacerlas más inteligentes.</p>
+          <!-- Telefono -->
+          <div class="col-md-12 mx-auto">
+            <small><b>Recibe recordatorios</b> de tus promos favoritas</small>
+          </div>
+          <div class="form-group col-md-6">
+            <label class="label-perfil pt-0">Teléfono</label>
+            <input type="tel" class="form-control" id="telefono" name="telefono" [(ngModel)]="data.telefono"
+              #telefono="ngModel" pattern="[0-9]{9}" required placeholder="Tu celular *">
+            <span class="text-danger small" *ngIf="!telefono.valid && telefono.touched">
+              El número de celular debe tener 9 dígitos
+            </span>
+          </div>
+          <!-- Tipo y número de documento -->
+          <div class="col-md-12 mx-auto">
+            <small><b>Accede a promociones</b> por tus suscripciones exclusivas</small>
+          </div>
+          <div class="row mx-1">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="label-perfil pt-0">Tipo Documento</label>
+                <select class="form-control" id="tipoDocumento" name="tipoDocumento" [(ngModel)]="data.tipoDocumento"
+                  #tipoDocumento="ngModel" (change)="changePattern(tipoDocumento.value)">
+                  <option value="DNI">DNI</option>
+                  <option value="CARNET_EXTRANJERIA">Carnet Extranjería</option>
+                </select>
+                <span class="text-danger small" *ngIf="!tipoDocumento.valid && tipoDocumento.touched">
+                  Debe indicar su tipo de documento: DNI ó Carnet de Extranjería
+                </span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="label-perfil pt-0">Número Documento</label>
+                <input type="text" class="form-control" id="numeroDocumento" name="numeroDocumento"
+                  [(ngModel)]="data.numeroDocumento" #numeroDocumento="ngModel" [pattern]="documentPattern" required
+                  [placeholder]="documentPlaceHolder">
+                <span class="text-danger small" *ngIf="!numeroDocumento.valid && numeroDocumento.touched">
+                  {{ documentError }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mx-auto">
+            <small><b>Recibe recomendaciones</b> más acordes a ti</small>
+          </div>
+          <!-- Sexo -->
+          <div class="col-md-12">
+            <label class="label-perfil pt-0">Género</label>
+            <div class="form-check-radio form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="sexo" id="sexoFemenino" [(ngModel)]="data.sexo"
+                  #sexo="ngModel" value="Femenino">Femenino
+                <span class="form-check-sign"></span>
+              </label>
+            </div>
+            <div class="form-check-radio form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="sexo" id="sexoMasculino" [(ngModel)]="data.sexo"
+                  #sexo="ngModel" value="Masculino">Masculino
+                <span class="form-check-sign"></span>
+              </label>
+            </div>
+          </div>
+          <!-- Botones de Navegacion -->
+          <div class="py-3">
+            <button class="btn btnPrev btn-secondary float-left" type="button"
+              (click)="btnPrevPersonalData(signUpForm.value)">
+              <i class="fa fa-arrow-left pr-2" aria-hidden="true"></i> Anterior
+            </button>
+            <button class="btn btnNext btn-primary float-right" type="button"
+              (click)="btnNextPersonalData(signUpForm.value)"
+              [ngClass]="{ 'disabled': (!numeroDocumento.valid || !tipoDocumento.valid || !telefono.valid) }"
+              [disabled]="!numeroDocumento.valid || !tipoDocumento.valid || !telefono.valid">
+              <i class="fa fa-spinner fa-spin py-1" aria-hidden="true" *ngIf="spinner"></i>
+              Siguiente
+              <i class="fa fa-arrow-right pl-1" aria-hidden="true" *ngIf="!spinner"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!--Codigo Promocional y aceptar Términos y Condiciones -->
+      <div class="row step-content" id="step-3" *ngIf="showStep3">
+        <div class="col-md-8 mx-auto">
+          <h3 class="pl-0 mt-3">¿Tienes un código? </h3>
+          <p class="pb-2">Si un amigo te dió un código ingrésalo aquí.
+            <div class="row py-3">
+              <!-- Código Referido -->
+              <div class="form-group col-md-6">
+                <label class="label-perfil pt-0">Código Promocional</label>
+                <input type="text" class="form-control" id="codigoReferido" name="codigoReferido"
+                  [(ngModel)]="data.codigoReferido" #codigoReferido="ngModel" pattern="[A-Za-z0-9]{6}"
+                  placeholder="Código Referido " title="Código de la persona que te recomendó Para Ti App">
+                <span class="text-danger small" *ngIf="!codigoReferido.valid && codigoReferido.touched">
+                  El código debe tener 6 caracteres
+                </span>
+              </div>
+            </div>
+            <!-- Confirmar Terminos y Condiciones -->
+            <div class="row">
+              <div class="col-md-12 pt-3">
+                <small>Debes aceptar los <a rel="tooltip" title="Términos y Condiciones" data-placement="bottom"
+                    href="#" data-toggle="modal" data-target="#TerminosModal" target="_blank">
+                    Términos y Condiciones</a> para continuar
+                </small>
+              </div>
+              <div class="form-check pt-2">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="aceptaTerminos" id="aceptaTerminos"
+                    [(ngModel)]="data.aceptaTerminos" #aceptaTerminos="ngModel" required>
+                  Acepto los Términos y Condiciones
+                  <span class="form-check-sign"></span>
+                </label>
+              </div>
+            </div>
+            <!-- Botones de Navegacion -->
+            <div class="py-4">
+              <button class="btn btnPrev btn-secondary float-left" type="button"
+                (click)="btnPrevConfirm(signUpForm.value)">
+                <i class="fa fa-arrow-left pr-2" aria-hidden="true"></i>Anterior
+              </button>
+              <button class="btn btnNext btn-primary float-right" type="button"
+                (click)="btnRegistrame(signUpForm.value)" [ngClass]="{ 'disabled': !aceptaTerminos.valid }"
+                [disabled]="!aceptaTerminos.valid">
+                <i class="fa fa-spinner fa-spin py-1" aria-hidden="true" *ngIf="spinner"></i>
+                Regístrame
+                <i class="fa fa-arrow-right pl-1" aria-hidden="true" *ngIf="!spinner"></i>
+              </button>
+            </div>
+        </div>
+      </div>
+
+      <!-- Suscripciones -->
+      <div class="row step-content" id="step-4" *ngIf="showStep4">
+        <div class="col-md-10 mx-auto">
+          <h3 class="pl-0 mt-3">Tus Suscripciones!</h3>
+          <p class="pb-0">¿Eres suscriptor de algún programa de descuentos? Marca las empresas con las cuáles tienes
+            suscripción. <br> <small>Puedes hacerlo más tarde editando tu perfil.</small></p>
+          <p class="text-right my-0 py-1 font-italic" id="totalSources" [innerHTML]="messageTotalSources"></p>
+          <div class="card-columns">
+            <ng-container *ngFor="let source of availableSources; let i = index">
+              <div class="card no-transition">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" id="fuente-{{source.id}}"
+                      name="fuente-{{source.id}}" [ngModel]="source.checked" (click)="totalSources()"
+                      value="{{source.id}}">
+                    <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                <img class="img-fluid" [src]="source.imgLogoFuente" [alt]="source.fuenteDescuento">
+              </div>
+            </ng-container>
+          </div>
+          <div class="py-3">
+            <button class="btn btnNext btn-primary float-right" type="submit">
+              <i class="fa fa-spinner fa-spin py-1" aria-hidden="true" *ngIf="spinner"></i>
+              Guardar
+              <i class="fa fa-arrow-right pl-1" aria-hidden="true" *ngIf="!spinner"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Listo -->
+      <div class="row step-content" id="step-5" *ngIf="showStep5">
+        <div class="col-md-12">
+          <h3 class="pl-0 mt-4">Listo!</h3>
+          <p>Ya puedes comenzar a disfrutar de los descuentos que tenemos para tí.</p>
+          <a class="btn btn-outline-secondary w-50 mx-auto my-4" [routerLink]="['/home']">
+            <i class="fa fa-shopping-bag ml-1" aria-hidden="true"></i> ¡Quiero verlos!
+          </a>
+          <p class="text-center">
+            Comparte con tus amigos y familiares para que se registren con tu Código de Promoción:
+            <strong>{{ codigoPromocion }}</strong>
+          </p>
+        </div>
+      </div>
+    </form>
+
+    <app-navigate-back></app-navigate-back>
+  </div>
+</div>

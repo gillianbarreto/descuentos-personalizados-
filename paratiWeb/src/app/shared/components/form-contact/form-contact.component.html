@@ -1,0 +1,103 @@
+<!-- Modal Contacto -->
+<div class="modal fade" id="formContactModal" tabindex="-1" role="dialog" aria-labelledby="contactModal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title mt-0" id="contactModal">¿Quieres saber más de ParaTi app?</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Déjanos tus datos, te enviaremos novedades.</p>
+        <div class="px-3 pb-2">
+          <form #contactForm="ngForm" id="contactForm" (ngSubmit)="sendData(contactForm)" novalidate>
+            <div class="row px-1">
+              <!-- Nombres -->
+              <div class="col-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" required
+                    pattern="([A-Za-zñáéíóúü]{2,24}[ ]{0,1})+" placeholder="Tu nombre *">
+                  <span class="text-danger small" *ngIf="!name.valid && name.touched">
+                    Escribe un nombre válido (sólo letras)
+                  </span>
+                </div>
+              </div>
+              <!-- e-mail -->
+              <div class="col-12">
+                <div class="form-group">
+                  <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel" required
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Tu e-mail *">
+                  <span class="text-danger small" *ngIf="!email.valid && email.touched">
+                    Escribe un email válido
+                  </span>
+                </div>
+              </div>
+              <!-- tipo y número de documento -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <select class="form-control" [ngModel]="typeSelected" id="documentType" name="documentType" ngModel
+                    #documentType="ngModel" required (change)="changePattern(documentType.value)">
+                    <option value="DNI">DNI</option>
+                    <option value="CARNET_EXTRANJERIA">Carnet Extranjería</option>
+                  </select>
+                  <span class="text-danger small" *ngIf="!documentType.valid && documentType.touched">
+                    Debe indicar su tipo de documento: DNI ó Carnet de Extranjería
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="documentNumber" name="documentNumber" ngModel
+                    #documentNumber="ngModel" required [pattern]="documentPattern" [placeholder]="documentPlaceHolder">
+                  <span class="text-danger small" *ngIf="!documentNumber.valid && documentNumber.touched">
+                    {{ documentError }}
+                  </span>
+                </div>
+              </div>
+              <!-- Telefono -->
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <input type="tel" class="form-control" id="phone" name="phone" ngModel #phone="ngModel" required
+                    pattern="[0-9]{9}" placeholder="Tu celular *">
+                  <span class="text-danger small" *ngIf="!phone.valid && phone.touched">
+                    El número de celular debe tener 9 dígitos
+                  </span>
+                </div>
+              </div>
+              <!-- Comentarios -->
+              <div class="col-12">
+                <div class="form-group">
+                  <textarea class="form-control" rows="5" id="comment" name="comment" ngModel #comment="ngModel"
+                    placeholder="Tus comentarios o sugerencias *" required></textarea>
+                  <span class="text-danger small" *ngIf="!comment.valid && comment.touched">
+                    Valoramos tus comentarios y sugerencias, cuéntanos cómo podemos ayudarte!
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- Mensaje feedback -->
+              <div class="col-12 py-2">
+                <div id="feedback"></div>
+              </div>
+              <!-- Botones de accion -->
+              <div class="col-12">
+                <div class="mb-0 py-2 text-right">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary" [ngClass]="{ 'disabled': !contactForm.valid }"
+                    [disabled]="!contactForm.valid">
+                    <i class="fa" [ngClass]="{ 'fa-share': !spinner, 'fa-spinner fa-spin': spinner }"
+                      aria-hidden="true"></i>
+                    <span class="d-none d-sm-inline-block"> Enviar </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

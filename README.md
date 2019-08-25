@@ -1,0 +1,1 @@
+Aplicación para consulta de descuentos personalizados y por categoría de una base de datos

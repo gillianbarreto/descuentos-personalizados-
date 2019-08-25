@@ -1,0 +1,182 @@
+@import "../../assets/sass/variables";
+
+/* ------------------
+:: Wellcome Section
+--------------------- */
+.wellcome-section {
+    background-color: white;
+    background-image: url("../../assets/img/bg-wellcome.jpg");
+    background-position: bottom center;
+    background-size: cover;
+}
+
+.wellcome-heading > h1 {
+    font-size: 3.5rem;
+    line-height: 3.6rem;
+    color: white; 
+    font-weight: normal;
+    position: relative;
+}
+.wellcome-heading > p {
+    color: white; 
+    font-size: 1.2rem;
+    line-height: 1.5em;
+    padding-right: 1rem;
+}
+.get-start-area .cta {
+    background-color: $color-3;
+    color: $color-1 !important;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: inline-block;
+    border: none;
+    height: 3rem;
+    min-width: 167px;
+    line-height: 3rem;
+    text-align: center;
+    border-radius: 24px;
+    padding: 0 1.5rem;
+}
+.get-start-area .cta:hover {
+    background: $color-1;
+    color: #fff;
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+/* ------------------
+:: Benefit Section
+--------------------- */
+.single-benefit {
+    border: 1px solid #eff2f6 !important;
+    padding: 20px;
+    border-radius: 40px;
+    -webkit-transition-duration: 800ms;
+    -o-transition-duration: 800ms;
+    transition-duration: 800ms;
+    margin-bottom: 1rem;
+    h2 {
+        font-weight: 300;
+        margin: 0;    }
+    h3 {
+        font-size: 2.8rem !important;
+        font-family: $p-font-family;
+        color: $color-4;
+        margin-top: 0px;
+        i {
+            margin-right: 1.9rem;
+            color: rgba($color-4,0.4);
+        }
+    }
+    p {
+        margin-bottom: 0;
+        color: $color-4;
+        font-size: 1.4rem;
+    }
+}
+.single-benefit:hover {
+    -webkit-box-shadow: 0 10px 90px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 90px rgba(0, 0, 0, 0.08);
+}
+
+/* ------------------
+:: Feature Section
+--------------------- */
+.feature-section .row {
+    margin-right: 0;
+}
+.feature-section {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.feature-section .container-fluid {
+    padding-right: 0;
+    margin-right: 0;
+}
+.download-image {
+    width: 100%;
+    bottom: -15px;
+    padding-right: 0;
+    height: auto;
+}
+.download-image img {
+    width: 100%;
+    height: auto;
+    float: right;
+}
+.download-text {
+    padding-left: 100px;
+}
+/* ------------------
+:: Video Section
+--------------------- */
+.video-section {
+    border: 20px solid #fff;
+    border-radius: 20px;
+    // height: 650px;
+    -webkit-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 575px) { 
+    .download-image img {
+        width: 100%;
+    }
+    .wellcome-heading > h1 {
+        font-size: 1.5rem;
+        line-height: 1.6rem;
+        padding-top: 30px;
+    }
+}
+@media (max-width: 991px) {
+    .download-image img {
+        width: 70%;
+    }
+    .w-90 {
+        width: 100% !important;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) { 
+    .wellcome-heading > h1 {
+        font-size: 2.8rem;
+        line-height: 3.2rem;
+    }
+    .wellcome-heading > p {
+        font-size: 1.5rem;
+    }
+}
+@media (max-width: 991px) {
+    .wellcome-heading > h1 {
+        font-size: 2.2rem;
+        line-height: 2.5rem;
+    }
+    .wellcome-heading > p {
+        font-size: 1.5rem;
+    }
+    .download-text {
+        padding-left: 15px;
+        text-align: center;
+    }
+}
+@media (min-width: 1400px) { 
+     .wellcome-heading > h1 {
+         font-size: 4rem;
+     }
+     .wellcome-heading > p {
+         font-size: 2.5rem;
+     }
+     .wellcome-text {
+        -webkit-box-align: center !important;
+        -ms-flex-align: center !important;
+        align-items: center !important;
+     }
+}
+@media (min-width: 2560px) { 
+    .wellcome-heading > h1 {
+       font-size: 6rem;
+   }
+   .wellcome-heading > p {
+       font-size: 3.5rem;
+   }
+}

@@ -1,0 +1,13 @@
+@import "../../../../assets/sass/variables";
+
+a > i {
+    font-size: 2rem;
+    color: rgba($color-3, 0.5); 
+}
+
+// Pantallas pequeñas
+@media (max-width: 767px) {
+    #btnBack {
+        margin-top: 2rem;
+    }
+}

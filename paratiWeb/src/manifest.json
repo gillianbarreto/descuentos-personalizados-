@@ -1,0 +1,30 @@
+{
+  "name": "ParaTi App",
+  "short_name": "ParaTi-App",
+  "description": "Para Ti - Todos los descuentos del mercado en un solo lugar",
+  "icons": [{
+      "src": "assets/img/logo-icon.svg",
+      "sizes": "48x48 72x72 96x96 128x128 256x256 512x512",
+      "type": "image/svg"
+    },
+    {
+      "src": "assets/img/icon-parati-app.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#5830B4",
+  "theme_color": "#5830B4",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.bcp.coebd.paratiapp"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://itunes.apple.com/pe/app/parati-los-mejores-descuentos/id1390708128?mt=8"
+    } 
+  ]
+}

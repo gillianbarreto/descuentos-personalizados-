@@ -1,0 +1,20 @@
+@import "../../../../assets/sass/variables";
+
+img {
+    background-color: $image-bg-color; 
+    // background-image: url('../../../../assets/img/placeholder-img.png');
+    background-position: top center;
+    background-size: cover;
+    //max-height: 400px;
+}
+
+.img-shadow {
+    -webkit-box-shadow: 10px 10px 46px -12px rgba(black,1);
+    -moz-box-shadow: 10px 10px 46px -12px rgba(black,1);
+    box-shadow: 10px 10px 46px -12px rgba(black,1);
+}
+// para imagenes del detalle
+.w-auto {
+    width: auto !important;
+    max-width: 100% !important;
+}
