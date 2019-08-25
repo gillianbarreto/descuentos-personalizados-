@@ -1,5 +1,4 @@
-
-# ParaTi - WEB Ver. 1.0
+# Web Descuentos personalizados
 
 ## Objetivo principal
 
